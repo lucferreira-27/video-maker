@@ -2,17 +2,21 @@ package br.com.lucas.applicaiton;
 
 import java.util.List;
 
+import br.com.lucas.config.Configuration;
 import br.com.lucas.robots.txtBot.Sentences;
 
-
 public class Content {
+
+	private String language;
 	private String search;
 	private String prefixText;
 	private String sourceContentOriginal;
 	private String sourceContentSanized;
-	
+	private String wikipediaFont;
+	private final int maximumSenteces = 7;
 	private List<Sentences> listSentences;
-	
+	private Sentences thumbnailSentence = new Sentences();
+
 	public String getSearch() {
 		return search;
 	}
@@ -29,12 +33,21 @@ public class Content {
 		this.prefixText = prefix;
 	}
 
-	@Override
-	public String toString() {
-		return "Content [search=" + search + ", prefixText=" + prefixText + "]";
+	public String getLanguage() {
+		return language;
 	}
 
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
+	@Override
+	public String toString() {
+		return "Content [language=" + language + ", search=" + search + ", prefixText=" + prefixText
+				+ ", sourceContentOriginal=" + sourceContentOriginal + ", sourceContentSanized=" + sourceContentSanized
+				+ ", maximumSenteces=" + maximumSenteces + ", listSentences=" + listSentences + ", thumbnailSentence="
+				+ thumbnailSentence + "]";
+	}
 
 	public String getSourceContentOriginal() {
 		return sourceContentOriginal;
@@ -60,13 +73,24 @@ public class Content {
 		this.listSentences = listSentences;
 	}
 
-	
-	
-	
+	public int getMaximumSenteces() {
+		return maximumSenteces;
+	}
 
+	public Sentences getThumbnailSentence() {
+		return thumbnailSentence;
+	}
 
+	public void setThumbnailSentence(Sentences thumbnailSentence) {
+		this.thumbnailSentence = thumbnailSentence;
+	}
 
-	
-	
-	
+	public String getWikipediaFont() {
+		return wikipediaFont;
+	}
+
+	public void setWikipediaFont(String wikipediaFont) {
+		this.wikipediaFont = wikipediaFont;
+	}
+
 }

@@ -1,14 +1,14 @@
 package br.com.lucas.robots.txtBot;
 
-import br.com.lucas.textBot.Setences;
 
 public class Content {
 	private String search;
 	private String prefixText;
 	private String sourceContentOriginal;
 	private String sourceContentSanized;
+	private final int maximumSenteces = 7;
 	
-	private Setences sentences = new Setences();
+	private Sentences sentences = new Sentences();
 	
 	public String getSearch() {
 		return search;
@@ -31,11 +31,11 @@ public class Content {
 		return "Content [search=" + search + ", prefixText=" + prefixText + "]";
 	}
 
-	public Setences getSentences() {
+	public Sentences getSentences() {
 		return sentences;
 	}
 
-	public void setSentences(Setences sentences) {
+	public void setSentences(Sentences sentences) {
 		this.sentences = sentences;
 	}
 
@@ -54,6 +54,11 @@ public class Content {
 	public void setSourceContentSanized(String sourceContentSanized) {
 		this.sourceContentSanized = sourceContentSanized;
 	}
+
+	public int getMaximumSenteces() {
+		return maximumSenteces;
+	}
+	
 	
 	
 
