@@ -18,7 +18,9 @@ public class RobotFile {
 	private final String folderTemplates = System.getProperty("user.dir") + "\\resourses\\video-resources\\templates\\";
 	private final String folderVideoOutput = System.getProperty("user.dir") + "\\resourses\\video-resources\\video-output\\";
 	private final String folderImageMagick = System.getProperty("user.dir") + "\\resourses\\ImageMagick\\";
+	private final String folderVoiceAudio = System.getProperty("user.dir") + "\\resourses\\video-resources\\voice-audio\\";
 	
+
 	public Content loadContentWithJson(Content content, JSONObject json) {
 
 		List<JSONObject> list = (List<JSONObject>) json.get("listSentences");
@@ -74,6 +76,10 @@ public class RobotFile {
 		return folderImageMagick;
 	}
 
+	public String getFolderVoiceAudio() {
+		return folderVoiceAudio;
+	}
+	
 	
 
 }

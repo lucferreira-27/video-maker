@@ -1,5 +1,6 @@
 package br.com.lucas.robots.imgBot;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,12 +15,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import br.com.lucas.applicaiton.Content;
 import br.com.lucas.config.Configuration;
 import br.com.lucas.config.GoogleImagesConfig;
+import br.com.lucas.robots.fileBot.RobotFile;
 import br.com.lucas.robots.txtBot.Sentences;
 import br.com.lucas.util.ConnectService;
 import br.com.lucas.util.RWFilesUtil;
 import br.com.lucas.util.RobotImageUtil;
 
 public class RobotImage {
+	private RobotFile botFile = new RobotFile();
 	private Content content;
 	private Configuration config;
 	private RWFilesUtil rw = new RWFilesUtil();
@@ -49,14 +52,23 @@ public class RobotImage {
 			featchGoogleAndReturnImagesLinks(content.getSearch() + keyword, s, null);
 
 		}
-		featchGoogleAndReturnImagesLinks(content.getSearch(), null, content.getThumbnailSentence());
+		
+			featchGoogleAndReturnImagesLinks(content.getSearch(), null, content.getThumbnailSentence());
 
+	
+
+	}
+
+	private void createImageOriginalFolder() {
+		String dest = botFile.getFolderImage() + "\\imagens-original\\";
+		File file = new File(dest);
+		file.mkdirs();
 	}
 
 	private void downlaodAllImages(List<Sentences> sentences, Sentences thumbnail) {
 		int index = 0;
 		String destOriginal = "\\imagens-original\\";
-
+		createImageOriginalFolder();
 		for (Sentences s : sentences) {
 
 			for (int i = 0; i < s.getImages().size(); i++) {
@@ -93,7 +105,7 @@ public class RobotImage {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
-			System.out.println("> Erro Image: " + thumbnail.getImages().get(i));
+			System.out.println("> Erro Image: " + thumbnail.getImageThumbnail().get(i));
 
 			System.out.println("> Trying to download another image");
 		}
@@ -126,11 +138,11 @@ public class RobotImage {
 
 				is.close();
 				os.close();
-				if(RobotImageUtil.imageIsCorruped(dest)) {
+				if (RobotImageUtil.imageIsCorruped(dest)) {
 					throw new Exception("Imagem Corrompida");
 				}
 				downloadImages.add(img);
-				
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				throw new Exception(e.getMessage());
@@ -146,14 +158,13 @@ public class RobotImage {
 			GoogleImagesConfig imagesConfig = config.getImagesConfig();
 			imagesConfig.setQuerry(querry);
 			imagesConfig.setDefineSize("m");
-			
-			
+
 			if (sentence == null && thumbnail == null)
 				throw new NullPointerException("Sentence and Thumbnail cant not be null");
 			if (sentence != null && thumbnail != null)
 				throw new NullPointerException("Sentence or Thumbnail need be null");
 			if (thumbnail != null) {
-				querry = querry.split(" ")[0];
+				querry = content.getSearch();
 				System.out.println(querry);
 			}
 			ConnectService service = new ConnectService(imagesConfig.encode());
@@ -165,22 +176,24 @@ public class RobotImage {
 					if (service.getPage().getElementsByTagName("script").get(i).getTextContent()
 							.contains("AF_initDataCallback({key: 'ds:1', isError:  false , hash: '2', data:")) {
 						try {
-						String script = service.getPage().getElementsByTagName("script").get(i).getTextContent();
-						script = script.substring(script.indexOf(dataId));
-						script = script.substring(script.indexOf("]") + 1);
-						script = script.substring(0, script.indexOf("]"));
-						script = script.substring(script.indexOf("\"") + 1, script.lastIndexOf("\""));
-						links.add(script);
-						}catch (StringIndexOutOfBoundsException e) {
+							String script = service.getPage().getElementsByTagName("script").get(i).getTextContent();
+							script = script.substring(script.indexOf(dataId));
+							script = script.substring(script.indexOf("]") + 1);
+							script = script.substring(0, script.indexOf("]"));
+							script = script.substring(script.indexOf("\"") + 1, script.lastIndexOf("\""));
+							links.add(script);
+						} catch (StringIndexOutOfBoundsException e) {
 							// TODO: handle exception
 							continue;
 						}
 					}
 				}
 			}
-			if (thumbnail != null)
+			if (thumbnail != null) {
 				thumbnail.setImageThumbnail(links);
-			else
+				System.out.println("============AQUI============");
+				System.out.println(links);
+			} else
 				sentence.setImages(links);
 		} catch (ConnectException e) {
 			// TODO: handle exception

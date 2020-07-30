@@ -1,0 +1,1 @@
+"C:\Program Files\Adobe\Adobe After Effects CC 2019\Support Files\aerender.exe" -project "D:\OneDrive - Fatec Centro Paula Souza\Workspace\Java\workspace\video-maker\resourses\video-resouces\templates\Template by Filipe Deschamps.aep" -comp "main" -output "D:\OneDrive - Fatec Centro Paula Souza\Workspace\Java\workspace\video-maker\resourses\video-output\video.mp3"

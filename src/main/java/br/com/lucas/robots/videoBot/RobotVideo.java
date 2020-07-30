@@ -30,7 +30,6 @@ public class RobotVideo {
 	private Configuration config;
 	private RobotFile botFile = new RobotFile();
 
-
 	public RobotVideo(Content content, Configuration config) throws Exception {
 		// TODO Auto-generated constructor stub
 		this.content = content;
@@ -48,21 +47,18 @@ public class RobotVideo {
 		findFolders = Arrays.asList(folder.list()).stream()
 				.filter(file -> file.toLowerCase().contains("portable") && file.toLowerCase().contains("imagemagick"))
 				.collect(Collectors.toList());
-		
-		
-		
-		if(findFolders.size() == 1) {
+
+		if (findFolders.size() == 1) {
 			return botFile.getFolderImageMagick() + findFolders.get(0);
-		}
-		else if(findFolders.size() == 0)
+		} else if (findFolders.size() == 0)
 			throw new Exception("ImageMagick doesn't found in ImageMagick folder");
-		
+
 		for (String s : findFolders) {
 			String sub = s.substring(s.indexOf("-") + 1, s.indexOf("portable") - 1);
 			map.put(s, Integer.parseInt(sub.replace("-", "").replace(".", "")));
 		}
 		for (int i = 0; i < findFolders.size(); i++) {
-			if(map.get(findFolders.get(i)) == Collections.max(map.values())){
+			if (map.get(findFolders.get(i)) == Collections.max(map.values())) {
 				return botFile.getFolderImageMagick() + findFolders.get(i);
 			}
 		}
@@ -75,17 +71,38 @@ public class RobotVideo {
 		createAllSentecesImages(content);
 		createYoutubeThumbnail();
 		createAfterEffectsScript();
-		//renderVideoWitchAfterEffetcs();
+		// renderVideoWitchAfterEffetcs();
 	}
 
 	private void convertAllImages(Content content) {
+		createImagesConverted();
 		for (int i = -1; i < content.getMaximumSenteces(); i++) {
 			convertImage(String.valueOf(i));
 		}
 	}
 
-	private void convertImage(String index) {
+	private void createYoutubeThumbnailFolder() {
+		String dest = botFile.getFolderImage() + "\\youtube-thumbnail\\";
+		File file = new File(dest);
+		file.mkdirs();
+	}
 
+	private void createImagesConverted() {
+
+		String destConverted = botFile.getFolderImage() + "\\imagens-converted\\";
+
+		File file = new File(destConverted);
+		file.mkdirs();
+
+	}
+
+	private void createSentencesFolder() {
+		String dest = botFile.getFolderImage() + "\\sentences\\";
+		File file = new File(dest);
+		file.mkdirs();
+	}
+
+	private void convertImage(String index) {
 		String destOriginal = "\\imagens-original\\";
 		String destConverted = "\\imagens-converted\\";
 
@@ -134,6 +151,7 @@ public class RobotVideo {
 	}
 
 	private void createAllSentecesImages(Content content) {
+		createSentencesFolder();
 		for (int i = 0; i < content.getListSentences().size(); i++)
 			createSenteceImage(i, content.getListSentences().get(i).getText());
 
@@ -178,6 +196,7 @@ public class RobotVideo {
 
 	private void createYoutubeThumbnail() {
 		try {
+			createYoutubeThumbnailFolder();
 			IMOperation op = new IMOperation();
 			ConvertCmd cmd = new ConvertCmd();
 			String destThumbnail = "\\youtube-thumbnail\\";

@@ -10,6 +10,7 @@ import br.com.lucas.robots.fileBot.RobotFile;
 import br.com.lucas.robots.imgBot.RobotImage;
 import br.com.lucas.robots.txtBot.RobotText;
 import br.com.lucas.robots.videoBot.RobotVideo;
+import br.com.lucas.robots.voiceBot.RobotVoice;
 import br.com.lucas.robots.ytBot.RobotYoutube;
 import br.com.lucas.util.OrchestratorUtil;
 import br.com.lucas.util.RWFilesUtil;
@@ -21,6 +22,7 @@ public class Orchestrator {
 	private static RobotFile fileBot;
 	private static RobotVideo videoBot;
 	private static RobotYoutube ytBot;
+	private static RobotVoice voiceBot;
 
 	private static Scanner scan = new Scanner(System.in);
 
@@ -44,6 +46,7 @@ public class Orchestrator {
 			txtBot = new RobotText(content, config);
 			imgBot = new RobotImage(content, config);
 			videoBot = new RobotVideo(content, config);
+			voiceBot = new RobotVoice(content, config);
 			ytBot = new RobotYoutube(content, config);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -55,11 +58,15 @@ public class Orchestrator {
 		txtBot.start();
 		System.out.println("> [RobotText] - Done!");
 		rw.saveJson(content);
-		System.out.println("> [Opening Content.json]");
-		content = fileBot.loadContentWithJson(content, rw.loadJson(fileBot.getFolderResource() + "content.json"));
+		//System.out.println("> [Opening Content.json]");
+		//content = fileBot.loadContentWithJson(content, rw.loadJson(fileBot.getFolderResource() + "content.json"));
 
-		System.out.println("> [Done!]");
-
+		//System.out.println("> [Done!]");
+		
+		//System.out.println("> [RobotVoice] - Start!");
+		//voiceBot.start();
+		//System.out.println("> [RobotVoice] - Done!");
+			
 		System.out.println("> [RobotImage] - Start!");
 
 		imgBot.start();
@@ -74,7 +81,7 @@ public class Orchestrator {
 
 		System.out.println("> [RobotYoutube] - Start!");
 //		content = fileBot.loadContentWithJson(content, rw.loadJson(fileBot.getFolderResource() + "content.json"));
-		ytBot.start();
+		//ytBot.start();
 		System.out.println("> [RobotYoutube] - Done!");
 
 	}
