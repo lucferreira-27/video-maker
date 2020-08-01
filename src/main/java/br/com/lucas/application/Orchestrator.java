@@ -1,4 +1,4 @@
-package br.com.lucas.applicaiton;
+package br.com.lucas.application;
 
 import java.util.Scanner;
 

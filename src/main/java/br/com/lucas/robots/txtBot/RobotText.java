@@ -26,7 +26,7 @@ import com.ibm.watson.natural_language_understanding.v1.model.AnalyzeOptions;
 import com.ibm.watson.natural_language_understanding.v1.model.Features;
 import com.ibm.watson.natural_language_understanding.v1.model.KeywordsOptions;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 import br.com.lucas.config.Configuration;
 import br.com.lucas.robots.fileBot.RobotFile;
 import br.com.lucas.util.RWFilesUtil;

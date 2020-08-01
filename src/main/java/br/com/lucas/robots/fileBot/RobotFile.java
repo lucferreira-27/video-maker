@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.json.simple.JSONObject;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 import br.com.lucas.robots.txtBot.Sentences;
 
 public class RobotFile {

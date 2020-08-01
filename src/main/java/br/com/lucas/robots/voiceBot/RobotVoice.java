@@ -12,7 +12,7 @@ import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
 import com.ibm.watson.text_to_speech.v1.util.WaveUtils;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 import br.com.lucas.config.Configuration;
 import br.com.lucas.robots.fileBot.RobotFile;
 

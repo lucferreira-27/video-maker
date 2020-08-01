@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 
 public class OrchestratorUtil {
 

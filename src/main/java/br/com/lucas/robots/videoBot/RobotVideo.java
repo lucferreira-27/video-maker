@@ -19,7 +19,7 @@ import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
 import org.im4java.process.ProcessStarter;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 import br.com.lucas.config.Configuration;
 import br.com.lucas.robots.fileBot.RobotFile;
 import br.com.lucas.util.RWFilesUtil;

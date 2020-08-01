@@ -12,7 +12,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 
-import br.com.lucas.applicaiton.Content;
+import br.com.lucas.application.Content;
 import br.com.lucas.config.Configuration;
 import br.com.lucas.config.GoogleImagesConfig;
 import br.com.lucas.robots.fileBot.RobotFile;
